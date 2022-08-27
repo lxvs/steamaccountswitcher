@@ -1,6 +1,8 @@
 @echo off
 setlocal
 chcp 65001 >nul
+set version=0.1.0
+set update=2022-08-27
 set _exit=
 set ec=0
 set regpath=HKCU\Software\Valve\Steam
@@ -69,8 +71,10 @@ if "%_parseloginusers_k%" == "AccountName" (
 exit /b 0
 
 :showit
+call:showversion
 set "_accounts=%accounts%"
 set "_names=%names%"
+@echo;
 @echo Switchable accounts:
 @echo;
 for /l %%i in (1,1,%amount%) do (
@@ -83,6 +87,11 @@ for /l %%i in (1,1,%amount%) do (
 )
 @echo;
 exit /b 0
+
+:showversion
+@echo Steam Account Switcher %version% ^(%update%^)
+@echo https://github.com/lxvs/steamaccountswitcher
+exit /b
 
 :spitaccount
 call:getaccount || exit /b
